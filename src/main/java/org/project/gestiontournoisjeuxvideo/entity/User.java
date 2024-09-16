@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.project.gestiontournoisjeuxvideo.util.Role;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-@Table(name ="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,11 @@ public class User {
     private int id;
 
     private String username;
-    private int age;
     private String email;
     private String password;
-    private String phone;
-    private Role role;
     private String profilPic;
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Participation> participationsRecord;
 }

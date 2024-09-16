@@ -14,15 +14,29 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-@Table(name = "match")
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_match")
     private int id;
-    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tournament")
+    private Tournament tournament;
+
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
+
+    @ManyToOne
+    @JoinColumn(name = "id_player1")
+    private User player1;
+
+    @ManyToOne
+    @JoinColumn(name = "id_player2")
+    private User player2;
+
+    private int scorePlayer1;
+    private int scorePlayer2;
     private Status status;
+    private boolean isResultConfirmed;
 }
