@@ -1,6 +1,6 @@
 package org.project.gestiontournoisjeuxvideo.service;
 
-import org.project.gestiontournoisjeuxvideo.entity.Member;
+import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +14,23 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public List<Member> getAll(){
+    public List<User> getAll(){
         return memberRepository.findAll();
     }
 
-    public Member getById(int id){
+    public User getById(int id){
         return memberRepository.findById(id).orElse(null);
     }
 
-    public Member save(Member member){
-        return memberRepository.save(member);
+    public User save(User user){
+        return memberRepository.save(user);
     }
 
-    public void delete(Member member){
-        memberRepository.delete(member);
+    public void delete(User user){
+        memberRepository.delete(user);
     }
 
-    public Member getByEmail(String email){
+    public User getByEmail(String email){
         return memberRepository.findByEmail(email);
     }
 }

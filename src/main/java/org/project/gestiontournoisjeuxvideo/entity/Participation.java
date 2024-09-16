@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.gestiontournoisjeuxvideo.util.Status;
-
-import java.util.Date;
 
 @Entity
 @Data
@@ -23,13 +20,14 @@ public class Participation {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_member")
-    private Member member;
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_tournament")
     private Tournament tournament;
 
-    private Date registrationDate;
-    private Status status;
+    @ManyToOne
+    @JoinColumn(name = "statistic_id")
+    private Statistic statistic;
 }

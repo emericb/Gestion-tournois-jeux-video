@@ -2,7 +2,7 @@ package org.project.gestiontournoisjeuxvideo.controller;
 
 
 import jakarta.servlet.http.HttpSession;
-import org.project.gestiontournoisjeuxvideo.entity.Member;
+import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.*;
 import org.project.gestiontournoisjeuxvideo.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +46,14 @@ public class MemberController {
 
     @RequestMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("member", new Member());
+        model.addAttribute("member", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String inscriptionPost(@ModelAttribute("member") Member member) {
-        member.setRole(Role.USER);
-        memberService.save(member);
+    public String inscriptionPost(@ModelAttribute("member") User user) {
+        user.setRole(Role.USER);
+        memberService.save(user);
         return "redirect:/member";
     }
 }
