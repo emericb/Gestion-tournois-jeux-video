@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentification</title>
+    <span th:replace="~{frag :: bootstrapImport}"></span>
+</head>
+<body>
+
+<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: footer}"></span>
+
+
+
+<div class="container">
+    <h1 class="color-change">Veuillez vous connectez</h1>
+    <form th:action="@{/login}" method="post">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Se connecter</th>
+                <th scope="col">Besoin de s inscrire ?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="text" name="email" placeholder="email">
+                </td>
+                <td>
+                    <input type="text" name="password" placeholder="password">
+                </td>
+                <td>
+                    <button type="submit">Se connecter</button>
+                </td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/registration}">Inscription</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

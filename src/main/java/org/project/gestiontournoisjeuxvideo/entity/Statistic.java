@@ -13,14 +13,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name ="statistic")
 public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name ="id_statistic")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "id_member")
+    private Member member;
 
     private int wins;
     private int losses;

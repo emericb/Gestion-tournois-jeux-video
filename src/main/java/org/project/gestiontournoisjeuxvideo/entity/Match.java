@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name ="match")
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +31,11 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "id_player1")
-    private User player1;
+    private Member player1;
 
     @ManyToOne
     @JoinColumn(name = "id_player2")
-    private User player2;
+    private Member player2;
 
     private int scorePlayer1;
     private int scorePlayer2;

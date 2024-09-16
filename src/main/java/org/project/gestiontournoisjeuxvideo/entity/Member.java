@@ -12,10 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+
+@Table(name ="member")
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_user")
+    @Column(name ="id_member")
     private int id;
 
     private String username;
@@ -24,6 +26,6 @@ public class User {
     private String profilPic;
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "member")
     private List<Participation> participationsRecord;
 }

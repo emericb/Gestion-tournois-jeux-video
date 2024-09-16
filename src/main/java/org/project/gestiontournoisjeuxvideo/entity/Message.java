@@ -1,21 +1,34 @@
 package org.project.gestiontournoisjeuxvideo.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
+@Table(name = "message")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @Column(name ="id_message")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
+    @JoinColumn(name = "id_sender")
+    private Member sender;
 
     @ManyToOne
-    @JoinColumn(name = "recipient_id")
-    private User recipient;
+    @JoinColumn(name = "id_recipient")
+    private Member recipient;
 
     private String content;
     private Date sendDate;
