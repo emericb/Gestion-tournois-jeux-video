@@ -18,9 +18,7 @@ public class User {
     @Column(name ="id_user")
     private int id;
 
-    private String firstname;
-    private String lastname;
-    private String pseudo;
+    private String username;
     private int age;
     private String email;
     private String password;

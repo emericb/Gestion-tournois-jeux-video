@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.gestiontournoisjeuxvideo.util.Format;
-import org.project.gestiontournoisjeuxvideo.util.GameName;
-import org.project.gestiontournoisjeuxvideo.util.GameType;
+import org.project.gestiontournoisjeuxvideo.util.Status;
 
 import java.time.LocalDateTime;
 
@@ -17,20 +15,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 
-@Table(name ="tournament")
-public class Tournament {
-
+@Table(name = "match")
+public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_tournament")
+    @Column(name ="id_match")
     private int id;
     private String name;
-    private GameName gameName;
-    private GameType gameType;
-    private Format format;
-    private String rules;
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
-    private int PlayerLimit;
-
+    private Status status;
 }
