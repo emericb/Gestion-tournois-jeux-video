@@ -3,7 +3,7 @@ package org.project.gestiontournoisjeuxvideo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.project.gestiontournoisjeuxvideo.util.GameType;
+import org.project.gestiontournoisjeuxvideo.util.Role;
 
 @Entity
 @Data
@@ -25,7 +25,6 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private GameType gameType;
-    private boolean isAdmin;
+    private Role role;
     private String profilPic;
 }
