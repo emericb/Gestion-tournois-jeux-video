@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MemberController {
-    private final MemberService memberService;
+public class UserController {
+    private final UserService userService;
     private final ParticipationService participationService;
     private final TournamentService tournamentService;
     private final MatchService matchService;
@@ -25,8 +25,8 @@ public class MemberController {
 
 
     @Autowired
-    public MemberController(HttpSession httpSession, LoginService loginService, MemberService memberService, ParticipationService participationService, TournamentService tournamentService, MatchService matchService) {
-        this.memberService = memberService;
+    public UserController(HttpSession httpSession, LoginService loginService, UserService userService, ParticipationService participationService, TournamentService tournamentService, MatchService matchService) {
+        this.userService = userService;
         this.participationService = participationService;
         this.tournamentService = tournamentService;
         this.matchService = matchService;
@@ -34,26 +34,26 @@ public class MemberController {
         this.httpSession = httpSession;
     }
 
-    @RequestMapping("/member")
+    @RequestMapping("/user")
     public String member(Model model) {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");
-            model.addAttribute("member", memberService.getByEmail(email));
-            return "member";
+            model.addAttribute("user", userService.getByEmail(email));
+            return "user";
         }
         return "login";
     }
 
     @RequestMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("member", new User());
+        model.addAttribute("user", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String inscriptionPost(@ModelAttribute("member") User user) {
+    public String inscriptionPost(@ModelAttribute("user") User user) {
         user.setRole(Role.USER);
-        memberService.save(user);
-        return "redirect:/member";
+        userService.save(user);
+        return "redirect:/user";
     }
 }

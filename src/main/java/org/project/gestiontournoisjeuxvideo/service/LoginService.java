@@ -2,7 +2,7 @@ package org.project.gestiontournoisjeuxvideo.service;
 
 import jakarta.servlet.http.HttpSession;
 import org.project.gestiontournoisjeuxvideo.entity.User;
-import org.project.gestiontournoisjeuxvideo.repository.MemberRepository;
+import org.project.gestiontournoisjeuxvideo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 public class LoginService {
     @Autowired
     private HttpSession httpSession;
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
-    public LoginService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public LoginService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public boolean login(String email, String password) {
-        User user = memberRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 httpSession.setAttribute("login", "OK");
-                httpSession.setAttribute("email", member.getEmail());
-                httpSession.setAttribute("role", member.getRole());
+                httpSession.setAttribute("email", user.getEmail());
+                httpSession.setAttribute("role", user.getRole());
                 return true;
             }
         }
