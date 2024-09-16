@@ -12,13 +12,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name ="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_user")
+    @Column(name ="id_member")
     private int id;
 
     private String username;
+
+    @Column(unique = true)
     private String email;
     private String password;
     private String profilPic;

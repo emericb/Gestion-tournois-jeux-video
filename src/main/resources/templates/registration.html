@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <span th:replace="~{frag :: bootstrapImport}"></span>
+</head>
+<body>
+
+<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: footer}"></span>
+
+<div class="container">
+    <h1 class="color-change">Inscription d'un nouvel utilisateur</h1>
+    <form th:action="@{/registration}" method="post" th:object="${user}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Validez l'inscription</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="text" id="email" th:field="*{email}" placeholder="Entrez l email">
+                </td>
+                <td>
+                    <input type="text" id="username" th:field="*{username}" placeholder="Entrez votre username">
+                </td>
+                <td>
+                    <input type="text" id="password" th:field="*{password}" placeholder="Entrez votre password">
+                </td>
+                <td>
+                    <button type="submit">S'inscrire</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>

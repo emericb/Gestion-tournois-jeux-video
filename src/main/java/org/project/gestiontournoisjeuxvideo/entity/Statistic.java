@@ -13,13 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name ="statistic")
 public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name ="id_statistic")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_member")
     private User user;
 
     private int wins;
@@ -27,5 +30,5 @@ public class Statistic {
     private double ratio;
 
     @OneToMany(mappedBy = "statistic")
-    private List<Tournament> tournamentHistory;
+    private List<Participation> tournamentHistory;
 }

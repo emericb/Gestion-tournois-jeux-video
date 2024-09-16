@@ -1,24 +1,33 @@
 package org.project.gestiontournoisjeuxvideo.entity;
 
 import jakarta.persistence.*;
-import org.project.gestiontournoisjeuxvideo.util.Status;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
+@Table(name = "participation")
 public class Participation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_participation")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "tournament_id")
+    @JoinColumn(name = "id_tournament")
     private Tournament tournament;
 
-    private Date registrationDate;
-    private Status status;
+    @ManyToOne
+    @JoinColumn(name = "statistic_id")
+    private Statistic statistic;
 }

@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name = "tournament")
 public class Tournament {
 
     @Id
@@ -22,7 +24,12 @@ public class Tournament {
     @Column(name ="id_tournament")
     private int id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "game_id")
     private Game game;
+
+
     private Format format;
     private String rules;
     private LocalDateTime dateStart;
@@ -32,4 +39,8 @@ public class Tournament {
 
     @OneToMany(mappedBy = "tournament")
     private List<Match> brackets;
+
+    @ManyToOne
+    @JoinColumn(name = "id_statistic")
+    private Statistic statistic;
 }
