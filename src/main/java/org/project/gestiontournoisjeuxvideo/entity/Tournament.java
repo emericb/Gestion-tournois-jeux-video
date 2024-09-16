@@ -25,6 +25,11 @@ public class Tournament {
     private int id;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
+
+
     private Format format;
     private String rules;
     private LocalDateTime dateStart;
@@ -38,8 +43,4 @@ public class Tournament {
     @ManyToOne
     @JoinColumn(name = "id_statistic")
     private Statistic statistic;
-
-    @ManyToOne
-    @JoinColumn(name = "id_game")
-    private Game game;
 }

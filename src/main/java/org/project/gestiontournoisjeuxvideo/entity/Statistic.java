@@ -23,12 +23,12 @@ public class Statistic {
 
     @ManyToOne
     @JoinColumn(name = "id_member")
-    private Member member;
+    private User user;
 
     private int wins;
     private int losses;
     private double ratio;
 
     @OneToMany(mappedBy = "statistic")
-    private List<Tournament> tournamentHistory;
+    private List<Participation> tournamentHistory;
 }

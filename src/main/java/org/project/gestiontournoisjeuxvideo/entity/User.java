@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-@Table(name ="member")
-public class Member {
+@Table(name ="users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_member")
@@ -28,6 +28,6 @@ public class Member {
     private String profilPic;
     private Role role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "user")
     private List<Participation> participationsRecord;
 }
