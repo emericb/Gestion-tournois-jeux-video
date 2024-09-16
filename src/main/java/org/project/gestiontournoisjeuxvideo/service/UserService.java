@@ -1,8 +1,6 @@
 package org.project.gestiontournoisjeuxvideo.service;
 
-import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.entity.User;
-import org.project.gestiontournoisjeuxvideo.repository.TournamentRepository;
 import org.project.gestiontournoisjeuxvideo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
