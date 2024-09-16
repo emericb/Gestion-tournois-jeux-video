@@ -2,5 +2,5 @@ package org.project.gestiontournoisjeuxvideo.util;
 
 public enum Role {
     ADMIN,
-    PARTICIPANT
+    USER
 }
