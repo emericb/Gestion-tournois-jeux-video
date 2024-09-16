@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @RequestMapping("/user")
-    public String member(Model model) {
+    public String user(Model model) {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");
             model.addAttribute("user", userService.getByEmail(email));
