@@ -27,7 +27,7 @@ public class LoginController {
     @RequestMapping("/login")
     public String login(Model model) {
         if (loginService.isLogged()) {
-            model.addAttribute("user", memberService.getByEmail((String) httpSession.getAttribute("email")));
+            model.addAttribute("member", memberService.getByEmail((String) httpSession.getAttribute("email")));
             return "member";
         }
         return "login";
@@ -37,7 +37,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         if (loginService.login(email, password)) {
-            model.addAttribute("user", memberService.getByEmail((String) httpSession.getAttribute("email")));
+            model.addAttribute("member", memberService.getByEmail((String) httpSession.getAttribute("email")));
             return "member";
         }
         return "redirect:/login";
