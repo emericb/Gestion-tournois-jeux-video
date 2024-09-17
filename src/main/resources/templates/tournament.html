@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Modifier le profil</title>
+    <title>Liste des tournois</title>
     <span th:replace="~{frag :: bootstrapImport}"></span>
 </head>
 <body>
@@ -24,6 +24,7 @@
             <th scope="col">Nombre de participant/equipe</th>
             <th scope="col">Critere de participation</th>
             <th scope="col">Rank pour participer</th>
+            <th scope="col">Inscription</th>
         </tr>
         </thead>
         <tbody th:each="e : ${tournaments}">
@@ -35,6 +36,9 @@
         <td th:text="${e.getPlayerLimit()}"></td>
         <td th:text="${e.getEligibilityCriteria()}"></td>
         <td th:text="${e.getRank()}"></td>
+        <td>
+            <a th:href="@{/participation/{id_tournament}(id_tournament=${e.getId()})}" class="btn btn-primary">S'inscrire</a>
+        </td>
         </tbody>
     </table>
 

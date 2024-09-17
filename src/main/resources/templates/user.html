@@ -19,6 +19,7 @@
             <th scope="col">Username</th>
             <th scope="col">Password</th>
             <th scope="col">Preference</th>
+            <th scope="col">Rank</th>
             <th scope="col">Avatar</th>
         </tr>
         </thead>
@@ -26,6 +27,7 @@
         <td th:text="${user.getUsername()}"></td>
         <td th:text="${user.getPassword()}"></td>
         <td th:text="${user.getPreference()}"></td>
+        <td th:text="${user.getRank()}"></td>
         <td><img th:if="${user.getProfilPic()}" th:src="@{/images/{filename}(filename=${user.profilPic})}"
                  alt="Image de l'user" style="width: 100px; height: auto;"></td>
         </tbody>
@@ -42,6 +44,7 @@
                 <th scope="col">Username</th>
                 <th scope="col">Password</th>
                 <th scope="col">Préférence</th>
+                <th scope="col">Rank</th>
                 <th scope="col">Modifier ?</th>
             </tr>
             </thead>
@@ -59,6 +62,13 @@
                 </td>
                 <td>
                     <input type="text" id="preference" th:field="*{preference}" placeholder="Entrez votre préférence">
+                </td>
+                <td>
+                    <select id="rank" th:field="*{rank}">
+                        <option th:each="rank : ${T(org.project.gestiontournoisjeuxvideo.util.Rank).values()}"
+                                th:value="${rank}"
+                                th:text="${rank}"></option>
+                    </select>
                 </td>
                 <td>
                     <button type="submit" class="btn btn-primary">Modifier</button>

@@ -1,6 +1,7 @@
 package org.project.gestiontournoisjeuxvideo.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.project.gestiontournoisjeuxvideo.entity.Participation;
 import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.entity.User;
@@ -9,12 +10,15 @@ import org.project.gestiontournoisjeuxvideo.service.ParticipationService;
 import org.project.gestiontournoisjeuxvideo.service.TournamentService;
 import org.project.gestiontournoisjeuxvideo.service.UserService;
 import org.project.gestiontournoisjeuxvideo.util.Role;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class ParticipationController {
@@ -40,39 +44,39 @@ public class ParticipationController {
         }
 
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
-        model.addAttribute("tournament",tournamentService.getById(id_tournament));
-        model.addAttribute("user", user);
-        return "tournament";
-    }
+        Tournament tournament = tournamentService.getById(id_tournament);
 
-    @RequestMapping("/participation-registration/{id_tournament}")
-    public String registration(Model model, @PathVariable int id_tournament) {
-        if (!loginService.isLogged()) {
-            return "redirect:/login";
-        }
+        List<Participation> participants = participationService.findByTournament(tournament);
 
-        User user = userService.getByEmail((String) httpSession.getAttribute("email"));
-        model.addAttribute("tournament",tournamentService.getById(id_tournament));
+        model.addAttribute("participants", participants);
+        model.addAttribute("tournament", tournament);
         model.addAttribute("user", user);
         model.addAttribute("participation", new Participation());
+        model.addAttribute("isRank", user.getRank() == tournament.getRank());
 
-        if(user.getRank() != tournamentService.getById(id_tournament).getRank()) {
-            return "redirect:/participation/"+id_tournament;
-        }
-
-        return "participation-registration";
+        return "participation";
     }
 
-    @PostMapping("/participation-registration")
-    public String inscriptionPost(@ModelAttribute("participation") Participation participation) {
+    @PostMapping("/participation/{id_tournament}")
+    public String inscriptionPost(@ModelAttribute("participation") Participation participation, @PathVariable int id_tournament, Model model) {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
 
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
+        participation.setUser(user);
 
+        Tournament tournament = tournamentService.getById(id_tournament);
+        participation.setTournament(tournament);
+
+        try {
+            participationService.save(participation);
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("errorMessage", "Vous êtes déjà inscrit à ce tournoi.");
+            return "participation";
+        }
 
         participationService.save(participation);
-        return "redirect:/tournament";
+        return "redirect:/participation/" + id_tournament;
     }
 }
