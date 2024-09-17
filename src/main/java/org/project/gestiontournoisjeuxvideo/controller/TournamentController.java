@@ -39,9 +39,11 @@ public class TournamentController {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
+
+        User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         model.addAttribute("tournaments", tournamentService.getAll());
-        model.addAttribute("member", userService.getByEmail((String) httpSession.getAttribute("email")));
         model.addAttribute("tournament", new Tournament());
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Ajouter le rôle ici aussi
         return "tournament";
     }
 
@@ -50,7 +52,14 @@ public class TournamentController {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
+
+        User user = userService.getByEmail((String) httpSession.getAttribute("email"));
+        if (user.getRole() != Role.ADMIN) {
+            return "redirect:/tournament";
+        }
+
         model.addAttribute("tournament", new Tournament());
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Passer le rôle à la vue
         return "tournament-registration";
     }
 
@@ -62,12 +71,9 @@ public class TournamentController {
 
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         if (user.getRole() != Role.ADMIN) {
-
-            tournament.setFormat(Format.AMATEUR);
-            tournamentService.save(tournament);
             return "redirect:/tournament";
         }
-        
+
         tournamentService.save(tournament);
         return "redirect:/tournament";
     }
