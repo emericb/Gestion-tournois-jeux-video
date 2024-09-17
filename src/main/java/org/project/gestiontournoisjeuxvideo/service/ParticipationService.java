@@ -2,6 +2,7 @@ package org.project.gestiontournoisjeuxvideo.service;
 
 import org.project.gestiontournoisjeuxvideo.entity.Notification;
 import org.project.gestiontournoisjeuxvideo.entity.Participation;
+import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.repository.NotificationRepository;
 import org.project.gestiontournoisjeuxvideo.repository.ParticipationRepository;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,9 @@ public class ParticipationService {
 
     public void delete(Participation participation) {
         participationRepository.delete(participation);
+    }
+
+    public List<Participation> findByTournament(Tournament tournament) {
+        return participationRepository.findByTournament(tournament);
     }
 }

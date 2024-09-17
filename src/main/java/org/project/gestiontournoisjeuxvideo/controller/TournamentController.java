@@ -1,6 +1,7 @@
 package org.project.gestiontournoisjeuxvideo.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.*;
@@ -64,7 +65,7 @@ public class TournamentController {
     }
 
     @PostMapping("/tournament-registration")
-    public String inscriptionPost(@ModelAttribute("tournament") Tournament tournament) {
+    public String inscriptionPost( @ModelAttribute("tournament") Tournament tournament) {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }

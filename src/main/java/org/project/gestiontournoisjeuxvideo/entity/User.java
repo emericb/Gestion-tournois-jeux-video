@@ -2,6 +2,7 @@ package org.project.gestiontournoisjeuxvideo.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.project.gestiontournoisjeuxvideo.util.Rank;
 import org.project.gestiontournoisjeuxvideo.util.Role;
@@ -24,7 +25,9 @@ public class User {
     private String username;
 
     @Column(unique = true)
+    @NotBlank(message = "email est a remplir")
     private String email;
+    @NotBlank(message = "password est a remplir")
     private String password;
     private String profilPic;
     private String preference;

@@ -2,6 +2,7 @@ package org.project.gestiontournoisjeuxvideo.controller;
 
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.*;
 import org.project.gestiontournoisjeuxvideo.util.Role;
@@ -45,7 +46,7 @@ public class UserController {
         this.httpSession = httpSession;
     }
 
-    @RequestMapping("/user")
+    @RequestMapping(value = {"/user", "/"})
     public String user(Model model) {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");
@@ -69,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@ModelAttribute("user") User updatedUser, Model model) {
+    public String updateUser( @ModelAttribute("user") User updatedUser, Model model) {
         User existingUser = userService.getById(updatedUser.getId());
 
         if (!existingUser.getEmail().equals(updatedUser.getEmail())) {
@@ -82,13 +83,14 @@ public class UserController {
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setPassword(updatedUser.getPassword());
         existingUser.setPreference(updatedUser.getPreference());
+        existingUser.setRank(updatedUser.getRank());
 
         userService.save(existingUser);
         return "redirect:/user";
     }
 
     @PostMapping("/upload")
-    public String postForm(@RequestParam("image") MultipartFile image, @RequestParam("id") int id) throws IOException {
+    public String postForm( @RequestParam("image") MultipartFile image, @RequestParam("id") int id) throws IOException {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
