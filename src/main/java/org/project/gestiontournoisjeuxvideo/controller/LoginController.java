@@ -48,6 +48,20 @@ public class LoginController {
         loginService.logout();
         return "redirect:/login";
     }
+
+    @RequestMapping("/password_Recovery")
+    public String PasswordRecovery() {
+        if (!loginService.isLogged()) {
+            return "redirect:/login";
+        }
+        return "password_Recovery";
+    }
+
+    @PostMapping("/password_Recovery")
+    public String login(@RequestParam("email") String email, Model model) {
+            model.addAttribute("user", userService.getByEmail((String) httpSession.getAttribute("email")));
+            return "user";
+    }
 }
 
 
