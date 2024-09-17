@@ -23,6 +23,7 @@
             <th scope="col">Date de fin</th>
             <th scope="col">Nombre de participant/equipe</th>
             <th scope="col">Critere de participation</th>
+            <th scope="col">Rank pour participer</th>
         </tr>
         </thead>
         <tbody th:each="e : ${tournaments}">
@@ -33,6 +34,7 @@
         <td th:text="${e.getDateEnd()}"></td>
         <td th:text="${e.getPlayerLimit()}"></td>
         <td th:text="${e.getEligibilityCriteria()}"></td>
+        <td th:text="${e.getRank()}"></td>
         </tbody>
     </table>
 
@@ -50,6 +52,7 @@
                     <th scope="col">Date de fin</th>
                     <th scope="col">Nombre de participant</th>
                     <th scope="col">Critere de participation</th>
+                    <th scope="col">Rank</th>
                     <th scope="col">Valider ?</th>
                 </tr>
                 </thead>
@@ -81,6 +84,13 @@
                     <td>
                         <input type="text" id="eligibilityCriteria" th:field="*{eligibilityCriteria}"
                                placeholder="Critere pour participer">
+                    </td>
+                    <td>
+                        <select id="rank" th:field="*{rank}">
+                            <option th:each="rank : ${T(org.project.gestiontournoisjeuxvideo.util.Rank).values()}"
+                                    th:value="${rank}"
+                                    th:text="${rank}"></option>
+                        </select>
                     </td>
                     <td>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>

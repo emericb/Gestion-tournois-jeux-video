@@ -35,7 +35,7 @@ public class TournamentController {
     }
 
     @RequestMapping("/tournament")
-    public String member(Model model) {
+    public String tournament(Model model) {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
@@ -43,7 +43,7 @@ public class TournamentController {
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         model.addAttribute("tournaments", tournamentService.getAll());
         model.addAttribute("tournament", new Tournament());
-        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Ajouter le rôle ici aussi
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN);
         return "tournament";
     }
 
@@ -59,7 +59,7 @@ public class TournamentController {
         }
 
         model.addAttribute("tournament", new Tournament());
-        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Passer le rôle à la vue
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN);
         return "tournament-registration";
     }
 
