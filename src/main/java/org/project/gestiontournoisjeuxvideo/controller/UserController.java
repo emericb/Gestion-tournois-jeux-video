@@ -54,6 +54,6 @@ public class UserController {
     public String inscriptionPost(@ModelAttribute("user") User user) {
         user.setRole(Role.USER);
         userService.save(user);
-        return "redirect:/user";
+        return "redirect:/registration";
     }
 }
