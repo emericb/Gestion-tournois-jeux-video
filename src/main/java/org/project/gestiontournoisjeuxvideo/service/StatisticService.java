@@ -1,14 +1,16 @@
 package org.project.gestiontournoisjeuxvideo.service;
 
-import org.project.gestiontournoisjeuxvideo.entity.Resultat;
 import org.project.gestiontournoisjeuxvideo.entity.Statistic;
 import org.project.gestiontournoisjeuxvideo.repository.StatisticRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StatisticService {
+
+    @Autowired
     private StatisticRepository statisticRepository;
 
     public StatisticService(StatisticRepository statisticRepository) {
@@ -27,7 +29,7 @@ public class StatisticService {
         return statisticRepository.save(statistic);
     }
 
-    public void delete(Statistic statistic) {
+    public static void delete(Statistic statistic) {
         statisticRepository.delete(statistic);
     }
 }

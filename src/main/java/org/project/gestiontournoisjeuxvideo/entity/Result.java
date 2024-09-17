@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name = "resultat")
-public class Resultat {
+@Table(name = "result")
+public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_resultat")
+    @Column(name ="id_result")
     private int id;
     private int score;
 }

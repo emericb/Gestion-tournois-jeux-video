@@ -25,6 +25,10 @@ public class Statistic {
     @JoinColumn(name = "id_member")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "id_tournament")
+    private Tournament tournament;
+
     private int wins;
     private int losses;
     private double ratio;

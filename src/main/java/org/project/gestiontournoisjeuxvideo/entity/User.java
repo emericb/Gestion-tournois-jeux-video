@@ -27,6 +27,7 @@ public class User {
     private String password;
     private String profilPic;
     private Role role;
+    protected
 
     @OneToMany(mappedBy = "user")
     private List<Participation> participationsRecord;
