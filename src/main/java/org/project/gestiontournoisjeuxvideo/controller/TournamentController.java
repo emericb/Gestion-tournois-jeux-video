@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.*;
+import org.project.gestiontournoisjeuxvideo.util.Format;
 import org.project.gestiontournoisjeuxvideo.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +62,9 @@ public class TournamentController {
 
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         if (user.getRole() != Role.ADMIN) {
+
+            tournament.setFormat(Format.AMATEUR);
+            tournamentService.save(tournament);
             return "redirect:/tournament";
         }
         

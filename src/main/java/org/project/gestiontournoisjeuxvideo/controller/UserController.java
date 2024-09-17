@@ -11,6 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -21,6 +31,7 @@ public class UserController {
     private final LoginService loginService;
 
     private HttpSession httpSession;
+    private String location = "src/main/resources/static/images";
 
 
 
@@ -54,6 +65,47 @@ public class UserController {
     public String inscriptionPost(@ModelAttribute("user") User user) {
         user.setRole(Role.USER);
         userService.save(user);
-        return "redirect:/registration";
+        return "redirect:/user";
     }
+
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User updatedUser, Model model) {
+        User existingUser = userService.getById(updatedUser.getId());
+
+        if (!existingUser.getEmail().equals(updatedUser.getEmail())) {
+            if (userService.emailExists(updatedUser.getEmail())) {
+                model.addAttribute("error", "L'email est déjà utilisé.");
+                return "user";
+            }
+        }
+
+        existingUser.setUsername(updatedUser.getUsername());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setPreference(updatedUser.getPreference());
+
+        userService.save(existingUser);
+        return "redirect:/user";
+    }
+
+    @PostMapping("/upload")
+    public String postForm(@RequestParam("image") MultipartFile image, @RequestParam("id") int id) throws IOException {
+        if (!loginService.isLogged()) {
+            return "redirect:/login";
+        }
+
+        User user = userService.getById(id);
+
+        Path destinationFile = Paths.get(location).resolve(image.getOriginalFilename()).toAbsolutePath();
+        InputStream inputStream = image.getInputStream();
+
+        Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+
+        user.setProfilPic(image.getOriginalFilename());
+        userService.save(user);
+
+        return "redirect:/user";
+    }
+
+
+
 }
