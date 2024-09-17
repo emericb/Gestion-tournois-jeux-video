@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.*;
+import org.project.gestiontournoisjeuxvideo.util.Format;
 import org.project.gestiontournoisjeuxvideo.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,11 @@ public class TournamentController {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
+
+        User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         model.addAttribute("tournaments", tournamentService.getAll());
-        model.addAttribute("member", userService.getByEmail((String) httpSession.getAttribute("email")));
         model.addAttribute("tournament", new Tournament());
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Ajouter le rôle ici aussi
         return "tournament";
     }
 
@@ -49,7 +52,14 @@ public class TournamentController {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
+
+        User user = userService.getByEmail((String) httpSession.getAttribute("email"));
+        if (user.getRole() != Role.ADMIN) {
+            return "redirect:/tournament";
+        }
+
         model.addAttribute("tournament", new Tournament());
+        model.addAttribute("isAdmin", user.getRole() == Role.ADMIN); // Passer le rôle à la vue
         return "tournament-registration";
     }
 
@@ -63,7 +73,7 @@ public class TournamentController {
         if (user.getRole() != Role.ADMIN) {
             return "redirect:/tournament";
         }
-        
+
         tournamentService.save(tournament);
         return "redirect:/tournament";
     }

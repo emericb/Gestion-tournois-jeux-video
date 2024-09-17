@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier le profil</title>
+    <span th:replace="~{frag :: bootstrapImport}"></span>
+</head>
+<body>
+
+<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: footer}"></span>
+
+<div class="container">
+
+    <h1 class="color-change">Liste de tournois</h1>
+    <table class="table" th:unless="${tournaments.isEmpty()}">
+        <thead>
+        <tr>
+            <th scope="col">Nom du tournois</th>
+            <th scope="col">Format</th>
+            <th scope="col">Regles</th>
+            <th scope="col">Date du lancement</th>
+            <th scope="col">Date de fin</th>
+            <th scope="col">Nombre de participant/equipe</th>
+            <th scope="col">Critere de participation</th>
+        </tr>
+        </thead>
+        <tbody th:each="e : ${tournaments}">
+        <td th:text="${e.getName()}"></td>
+        <td th:text="${e.getFormat()}"></td>
+        <td th:text="${e.getRules()}"></td>
+        <td th:text="${e.getDateStart()}"></td>
+        <td th:text="${e.getDateEnd()}"></td>
+        <td th:text="${e.getPlayerLimit()}"></td>
+        <td th:text="${e.getEligibilityCriteria()}"></td>
+        </tbody>
+    </table>
+
+
+    <div th:if="${isAdmin}">
+        <h1 class="color-change">Enregistrer un nouveau tournois</h1>
+        <form th:action="@{/tournament-registration}" method="post" th:object="${tournament}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom du tournois</th>
+                    <th scope="col">Format</th>
+                    <th scope="col">Regles</th>
+                    <th scope="col">Date du lancement</th>
+                    <th scope="col">Date de fin</th>
+                    <th scope="col">Nombre de participant</th>
+                    <th scope="col">Critere de participation</th>
+                    <th scope="col">Valider ?</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input type="text" id="name" th:field="*{name}" placeholder="Entrez le nom du tournois">
+                    </td>
+                    <td>
+                        <select id="format" th:field="*{format}">
+                            <option th:each="format : ${T(org.project.gestiontournoisjeuxvideo.util.Format).values()}"
+                                    th:value="${format}"
+                                    th:text="${format}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="rules" th:field="*{rules}" placeholder="Entrez vos regles">
+                    </td>
+                    <td>
+                        <input type="datetime-local" id="dateStart" name="dateStart" th:field="*{dateStart}" placeholder="Date du lancement">
+                    </td>
+                    <td>
+                        <input type="datetime-local" id="dateEnd" name="dateEnd" th:field="*{dateEnd}" placeholder="Date de fin">
+                    </td>
+                    <td>
+                        <input type="number" id="playerLimit" th:field="*{playerLimit}"
+                               placeholder="nombre de participant">
+                    </td>
+                    <td>
+                        <input type="text" id="eligibilityCriteria" th:field="*{eligibilityCriteria}"
+                               placeholder="Critere pour participer">
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

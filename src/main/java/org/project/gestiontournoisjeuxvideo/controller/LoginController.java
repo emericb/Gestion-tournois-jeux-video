@@ -1,6 +1,7 @@
 package org.project.gestiontournoisjeuxvideo.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.project.gestiontournoisjeuxvideo.entity.User;
 import org.project.gestiontournoisjeuxvideo.service.LoginService;
 import org.project.gestiontournoisjeuxvideo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,22 @@ public class LoginController {
     public String logout() {
         loginService.logout();
         return "redirect:/login";
+    }
+
+    @RequestMapping("/password_Recovery")
+    public String PasswordRecovery() {
+        return "password_Recovery";
+    }
+
+    @PostMapping("/password_Recovery")
+    public String recoverPassword(@RequestParam("email") String email, Model model) {
+        User user = userService.getByEmail(email);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "password_Recovery";
+        }
+        model.addAttribute("error", "Email non trouvé");
+        return "password_Recovery";
     }
 }
 
