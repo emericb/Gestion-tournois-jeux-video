@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.project.gestiontournoisjeuxvideo.util.Format;
+import org.project.gestiontournoisjeuxvideo.util.Rank;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Tournament {
     private LocalDateTime dateEnd;
     private int PlayerLimit;
     private String eligibilityCriteria;
+    private Rank rank;
 
     @OneToMany(mappedBy = "tournament")
     private List<Match> brackets;

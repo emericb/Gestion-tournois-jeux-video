@@ -3,6 +3,7 @@ package org.project.gestiontournoisjeuxvideo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.project.gestiontournoisjeuxvideo.util.Rank;
 import org.project.gestiontournoisjeuxvideo.util.Role;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public class User {
     private String profilPic;
     private String preference;
     private Role role;
+    private Rank rank;
+
 
     @OneToMany(mappedBy = "user")
     private List<Participation> participationsRecord;
