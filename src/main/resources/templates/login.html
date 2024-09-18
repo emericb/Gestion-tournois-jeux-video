@@ -9,7 +9,7 @@
 <body>
 
 <span th:replace="~{frag :: header}"></span>
-<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: navbar(${userlog})}"></span>
 
 <div class="container">
     <h4 class="color-change">Veuillez vous connectez</h4>

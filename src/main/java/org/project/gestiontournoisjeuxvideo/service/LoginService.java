@@ -23,6 +23,7 @@ public class LoginService {
                 httpSession.setAttribute("login", "OK");
                 httpSession.setAttribute("email", user.getEmail());
                 httpSession.setAttribute("role", user.getRole());
+                httpSession.setAttribute("user", user);
                 return true;
             }
         }
@@ -34,6 +35,7 @@ public class LoginService {
         httpSession.removeAttribute("login");
         httpSession.removeAttribute("email");
         httpSession.removeAttribute("role");
+        httpSession.removeAttribute("user");
     }
 
     public boolean isLogged() {

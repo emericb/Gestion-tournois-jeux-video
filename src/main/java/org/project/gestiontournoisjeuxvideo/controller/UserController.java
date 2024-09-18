@@ -47,7 +47,8 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
         return "home";
     }
 
@@ -57,6 +58,7 @@ public class UserController {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");
             model.addAttribute("user", userService.getByEmail(email));
+            model.addAttribute("userlog", httpSession.getAttribute("user"));
             return "user";
         }
         return "login";
@@ -65,6 +67,7 @@ public class UserController {
     @RequestMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
         return "registration";
     }
 

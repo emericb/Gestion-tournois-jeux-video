@@ -46,6 +46,7 @@ public class TournamentController {
         model.addAttribute("tournaments", tournamentService.getAll());
         model.addAttribute("tournament", new Tournament());
         model.addAttribute("isAdmin", user.getRole() == Role.ADMIN);
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
         return "tournament";
     }
 
@@ -54,7 +55,7 @@ public class TournamentController {
         if (!loginService.isLogged()) {
             return "redirect:/login";
         }
-
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));
         if (user.getRole() != Role.ADMIN) {
             return "redirect:/tournament";

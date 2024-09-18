@@ -34,11 +34,11 @@ public class LoginController {
         return "login";
     }
 
-
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         if (loginService.login(email, password)) {
             model.addAttribute("user", userService.getByEmail((String) httpSession.getAttribute("email")));
+            model.addAttribute("userlog", httpSession.getAttribute("user"));
             return "user";
         }
         return "redirect:/login";

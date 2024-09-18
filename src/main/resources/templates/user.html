@@ -8,7 +8,7 @@
 <body>
 
 <span th:replace="~{frag :: header}"></span>
-<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: navbar(${userlog})}"></span>
 
 <div class="container">
 
@@ -39,7 +39,6 @@
             <div th:if="${#fields.hasErrors('username')}" class="text-danger"
                  th:each="err : ${#fields.errors('username')}" th:text="${err}"></div>
         </div>
-
 
         <div>
             <input type="text" id="password" placeholder="Modifiez votre password"

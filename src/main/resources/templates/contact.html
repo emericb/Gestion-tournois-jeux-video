@@ -9,12 +9,13 @@
 
 <body>
 <span th:replace="~{frag :: header}"></span>
-<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: navbar(${userlog})}"></span>
 
     <div class="container">
 
       <p>Pour toute question ou support, n'hésitez pas à nous contacter.</p>
     </div>
+
 
     <div class="container">
       <h4>Formulaire de contact</h4>

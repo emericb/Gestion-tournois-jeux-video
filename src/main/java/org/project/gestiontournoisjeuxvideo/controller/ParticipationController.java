@@ -53,6 +53,7 @@ public class ParticipationController {
         model.addAttribute("user", user);
         model.addAttribute("participation", new Participation());
         model.addAttribute("isRank", user.getRank() == tournament.getRank());
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
 
         return "participation";
     }
@@ -79,4 +80,6 @@ public class ParticipationController {
         participationService.save(participation);
         return "redirect:/participation/" + id_tournament;
     }
+
+
 }
