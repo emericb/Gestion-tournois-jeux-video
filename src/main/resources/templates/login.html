@@ -8,43 +8,8 @@
 </head>
 <body>
 
-<header>
-    <h2 class="neon pink">
-        Gaming
-    </h2>
-
-    <h1 class="neon green">
-        TOURNAMENTS
-    </h1>
-</header>
-<nav>
-    <ul>
-
-        <li>
-            <a class="nav-link" th:href="@{/}">Accueil</a>
-        </li>
-        <li >
-            <a class="nav-link" th:href="@{/tournament}">Tournois</a>
-        </li>
-        <li >
-            <a class="nav-link" th:href="@{/user}">Mon compte</a>
-        </li>
-        <li>
-            <a class="nav-link" th:href="@{/registration}">Inscription</a>
-        </li>
-        <li>
-            <a class="nav-link" th:href="@{/registration}">Connexion</a>
-        </li>
-        <li >
-            <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
-        </li>
-        <li >
-            <a class="nav-link" th:href="@{/contact}">Contact</a>
-        </li>
-
-    </ul>
-</nav>
-
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
 
 
 
@@ -52,15 +17,6 @@
     <h3 class="color-change">Veuillez vous connectez</h3>
     <form th:action="@{/login}" method="post">
         <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Se connecter</th>
-                <th scope="col">Besoin de s inscrire ?</th>
-                <th scope="col">Recuperer le password</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td>
@@ -69,25 +25,16 @@
                 <td>
                     <input type="text" name="password" placeholder="password">
                 </td>
-                <td>
-                    <button type="submit">Se connecter</button>
-                </td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/registration}">Inscription</a>
-                </td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/password_Recovery}">Recuperer le password</a>
-                </td>
             </tr>
             </tbody>
         </table>
+        <p><button type="submit">Se connecter</button></p>
+        <p><a class="btn btn-primary" th:href="@{/registration}">S'inscrire</a></p>
+        <p><a class="btn btn-primary" th:href="@{/password_Recovery}">Récupérer votre mot de passe</a></p>
     </form>
 </div>
 
-
-<footer>
-    <p>2024 Gaming Tournaments. Tous droits réservés.</p>
-</footer>
+<span th:replace="~{frag :: footer}"></span>
 
 </body>
 </html>
