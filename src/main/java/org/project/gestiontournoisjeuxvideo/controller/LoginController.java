@@ -47,7 +47,7 @@ public class LoginController {
     @RequestMapping("/logout")
     public String logout() {
         loginService.logout();
-        return "redirect:/login";
+        return "home";
     }
 
     @RequestMapping("/password_Recovery")
