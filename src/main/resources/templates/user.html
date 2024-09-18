@@ -48,10 +48,6 @@
                  th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
         </div>
         <div>
-            <input type="text" id="email" placeholder="Modifiez votre email" readonly>
-        </div>
-
-        <div>
             <input type="text" id="preference"
                    placeholder="Modifiez vos préférences">
             <div th:if="${#fields.hasErrors('preference')}" class="text-danger"
@@ -79,8 +75,6 @@
         <br>
         <button type="submit">Valider</button>
     </form>
-
-
 
 
 </div>
