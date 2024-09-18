@@ -10,6 +10,7 @@ import org.project.gestiontournoisjeuxvideo.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,9 +66,15 @@ public class TournamentController {
     }
 
     @PostMapping("/tournament-registration")
-    public String inscriptionPost( @ModelAttribute("tournament") Tournament tournament) {
+    public String inscriptionPost(@ModelAttribute("tournament") @Valid Tournament tournament, BindingResult bindingResult, Model model) {
         if (!loginService.isLogged()) {
             return "redirect:/login";
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tournaments", tournamentService.getAll());
+            model.addAttribute("isAdmin", userService.getByEmail((String) httpSession.getAttribute("email")).getRole() == Role.ADMIN);
+            return "tournament";
         }
 
         User user = userService.getByEmail((String) httpSession.getAttribute("email"));

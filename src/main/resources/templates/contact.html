@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+  <title>contact</title>
+</head>
+
+<body>
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
+
+    <div class="container">
+
+      <p>Pour toute question ou support, n'hésitez pas à nous contacter.</p>
+    </div>
+
+    <div class="container">
+      <p>Formulaire de contact</p>
+      <form>
+
+        <textarea  id="fname" type="text" name="firstname" placeholder="Votre nom et prénom"></textarea>
+
+
+        <textarea  id="sujet" type="text" name="sujet" placeholder="L'objet de votre message"></textarea>
+
+
+        <textarea id="emailAddress" type="email" name="email" placeholder="Votre email" ></textarea>
+      </form>
+
+
+      <form>
+        <textarea id="subject" type="subject" name="subject" placeholder="Votre message" style="height:200px"></textarea>
+      </form>
+
+      <form>
+        <input type="submit" value="Envoyer">
+      </form>
+    </div>
+
+  </section>
+
+</main>
+  <span th:replace="~{frag :: footer}"></span>
+
+
+</body>
+</html>

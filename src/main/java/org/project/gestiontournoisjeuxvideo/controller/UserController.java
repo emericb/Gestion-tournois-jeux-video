@@ -9,6 +9,7 @@ import org.project.gestiontournoisjeuxvideo.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,6 @@ public class UserController {
     private String location = "src/main/resources/static/images";
 
 
-
     @Autowired
     public UserController(HttpSession httpSession, LoginService loginService, UserService userService, ParticipationService participationService, TournamentService tournamentService, MatchService matchService) {
         this.userService = userService;
@@ -46,7 +46,13 @@ public class UserController {
         this.httpSession = httpSession;
     }
 
-    @RequestMapping(value = {"/user", "/"})
+    @RequestMapping("/")
+    public String home() {
+        return "home";
+    }
+
+
+    @RequestMapping("/user")
     public String user(Model model) {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");
@@ -63,14 +69,23 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String inscriptionPost(@ModelAttribute("user") User user) {
+    public String inscriptionPost(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
         user.setRole(Role.USER);
         userService.save(user);
         return "redirect:/user";
     }
 
+
     @PostMapping("/updateUser")
-    public String updateUser( @ModelAttribute("user") User updatedUser, Model model) {
+    public String updateUser(@Valid @ModelAttribute("user") User updatedUser, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "user";
+        }
+
         User existingUser = userService.getById(updatedUser.getId());
 
         if (!existingUser.getEmail().equals(updatedUser.getEmail())) {
@@ -88,6 +103,7 @@ public class UserController {
         userService.save(existingUser);
         return "redirect:/user";
     }
+
 
     @PostMapping("/upload")
     public String postForm( @RequestParam("image") MultipartFile image, @RequestParam("id") int id) throws IOException {
@@ -107,7 +123,6 @@ public class UserController {
 
         return "redirect:/user";
     }
-
 
 
 }

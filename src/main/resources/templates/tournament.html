@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Liste des tournois</title>
-    <span th:replace="~{frag :: bootstrapImport}"></span>
+
 </head>
 <body>
-
+<span th:replace="~{frag :: header}"></span>
 <span th:replace="~{frag :: navbar}"></span>
-<span th:replace="~{frag :: footer}"></span>
-
+<main>
 <div class="container">
 
-    <h3 class="color-change">Liste de tournois</h3>
+    <h3 class="color-change">Liste des tournois</h3>
     <table class="table" th:unless="${tournaments.isEmpty()}">
         <thead>
         <tr>
@@ -44,18 +45,18 @@
 
 
     <div th:if="${isAdmin}">
-        <h1 class="color-change">Enregistrer un nouveau tournois</h1>
+        <h1 class="color-change">Enregistrer un nouveau tournoi</h1>
         <form th:action="@{/tournament-registration}" method="post" th:object="${tournament}">
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Nom du tournois</th>
+                    <th scope="col">Nom du tournoi</th>
                     <th scope="col">Format</th>
-                    <th scope="col">Regles</th>
-                    <th scope="col">Date du lancement</th>
+                    <th scope="col">Règles</th>
+                    <th scope="col">Date de lancement</th>
                     <th scope="col">Date de fin</th>
-                    <th scope="col">Nombre de participant</th>
-                    <th scope="col">Critere de participation</th>
+                    <th scope="col">Nombre de participants</th>
+                    <th scope="col">Critères de participation</th>
                     <th scope="col">Rank</th>
                     <th scope="col">Valider ?</th>
                 </tr>
@@ -63,38 +64,44 @@
                 <tbody>
                 <tr>
                     <td>
-                        <input type="text" id="name" th:field="*{name}" placeholder="Entrez le nom du tournois">
+                        <input type="text" id="name" th:field="*{name}" placeholder="Entrez le nom du tournoi" required>
+                        <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <select id="format" th:field="*{format}">
+                        <select id="format" th:field="*{format}" required>
                             <option th:each="format : ${T(org.project.gestiontournoisjeuxvideo.util.Format).values()}"
                                     th:value="${format}"
                                     th:text="${format}"></option>
                         </select>
+                        <div th:if="${#fields.hasErrors('format')}" class="text-danger" th:each="err : ${#fields.errors('format')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <input type="text" id="rules" th:field="*{rules}" placeholder="Entrez vos regles">
+                        <input type="text" id="rules" th:field="*{rules}" placeholder="Entrez vos règles" required>
+                        <div th:if="${#fields.hasErrors('rules')}" class="text-danger" th:each="err : ${#fields.errors('rules')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <input type="datetime-local" id="dateStart" name="dateStart" th:field="*{dateStart}" placeholder="Date du lancement">
+                        <input type="datetime-local" id="dateStart" th:field="*{dateStart}" required>
+                        <div th:if="${#fields.hasErrors('dateStart')}" class="text-danger" th:each="err : ${#fields.errors('dateStart')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <input type="datetime-local" id="dateEnd" name="dateEnd" th:field="*{dateEnd}" placeholder="Date de fin">
+                        <input type="datetime-local" id="dateEnd" th:field="*{dateEnd}" required>
+                        <div th:if="${#fields.hasErrors('dateEnd')}" class="text-danger" th:each="err : ${#fields.errors('dateEnd')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <input type="number" id="playerLimit" th:field="*{playerLimit}"
-                               placeholder="nombre de participant">
+                        <input type="number" id="playerLimit" th:field="*{playerLimit}" placeholder="Nombre de participants" required min="1">
+                        <div th:if="${#fields.hasErrors('playerLimit')}" class="text-danger" th:each="err : ${#fields.errors('playerLimit')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <input type="text" id="eligibilityCriteria" th:field="*{eligibilityCriteria}"
-                               placeholder="Critere pour participer">
+                        <input type="text" id="eligibilityCriteria" th:field="*{eligibilityCriteria}" placeholder="Critères pour participer" required>
+                        <div th:if="${#fields.hasErrors('eligibilityCriteria')}" class="text-danger" th:each="err : ${#fields.errors('eligibilityCriteria')}" th:text="${err}"></div>
                     </td>
                     <td>
-                        <select id="rank" th:field="*{rank}">
+                        <select id="rank" th:field="*{rank}" required>
                             <option th:each="rank : ${T(org.project.gestiontournoisjeuxvideo.util.Rank).values()}"
                                     th:value="${rank}"
                                     th:text="${rank}"></option>
                         </select>
+                        <div th:if="${#fields.hasErrors('rank')}" class="text-danger" th:each="err : ${#fields.errors('rank')}" th:text="${err}"></div>
                     </td>
                     <td>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -106,6 +113,9 @@
     </div>
 
 </div>
+</main>
+<span th:replace="~{frag :: footer}"></span>
+
 
 </body>
 </html>
