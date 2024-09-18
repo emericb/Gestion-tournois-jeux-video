@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+  <title>home</title>
+</head>
+<body>
+<header>
+  <h2 class="neon pink">
+    Gaming
+  </h2>
+
+  <h1 class="neon green">
+    TOURNAMENTS
+  </h1>
+</header>
+<nav>
+  <ul>
+
+<li>
+  <a class="nav-link" th:href="@{/}">Accueil</a>
+</li>
+    <li >
+      <a class="nav-link" th:href="@{/tournament}">Tournois</a>
+    </li>
+<li >
+  <a class="nav-link" th:href="@{/user}">Mon compte</a>
+</li>
+<li>
+  <a class="nav-link" th:href="@{/registration}">Inscription</a>
+</li>
+    <li>
+      <a class="nav-link" th:href="@{/registration}">Connexion</a>
+    </li>
+<li >
+  <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
+</li>
+    <li >
+      <a class="nav-link" th:href="@{/contact}">Contact</a>
+    </li>
+
+  </ul>
+</nav>
+
+<main>
+
+    <h3>W E L C O M E</h3>
+    <p>Organisez et participez à des tournois de jeux vidéo en toute simplicité.</p>
+
+  <div class="cadre">
+    <div class="gauche">  tournois en vedette</div>
+    <div class="milieu"> prochains événements</div>
+    <div class="droite"> actualités</div>
+  </div>
+</main>
+
+<footer>
+  <p>2024 Gaming Tournaments. Tous droits réservés.</p>
+</footer>
+
+</body>
+

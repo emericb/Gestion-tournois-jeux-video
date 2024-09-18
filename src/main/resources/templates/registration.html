@@ -1,17 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Registration</title>
-    <span th:replace="~{frag :: bootstrapImport}"></span>
+
 </head>
 <body>
 
-<span th:replace="~{frag :: navbar}"></span>
-<span th:replace="~{frag :: footer}"></span>
+<header>
+    <h2 class="neon pink">
+        Gaming
+    </h2>
+
+    <h1 class="neon green">
+        TOURNAMENTS
+    </h1>
+</header>
+<nav>
+    <ul>
+
+        <li>
+            <a class="nav-link" th:href="@{/}">Accueil</a>
+        </li>
+        <li >
+            <a class="nav-link" th:href="@{/tournament}">Tournois</a>
+        </li>
+        <li >
+            <a class="nav-link" th:href="@{/user}">Mon compte</a>
+        </li>
+        <li>
+            <a class="nav-link" th:href="@{/registration}">Inscription</a>
+        </li>
+        <li>
+            <a class="nav-link" th:href="@{/registration}">Connexion</a>
+        </li>
+        <li >
+            <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
+        </li>
+        <li >
+            <a class="nav-link" th:href="@{/contact}">Contact</a>
+        </li>
+
+    </ul>
+</nav>
 
 <div class="container">
-    <h1 class="color-change">Inscription d'un nouvel utilisateur</h1>
+    <h3 class="color-change">Inscription d'un nouvel utilisateur</h3>
     <form th:action="@{/registration}" method="post" th:object="${user}">
         <table class="table">
             <thead>
@@ -42,6 +78,9 @@
     </form>
 </div>
 
+<footer>
+    <p>2024 Gaming Tournaments. Tous droits réservés.</p>
+</footer>
 
 </body>
 </html>
