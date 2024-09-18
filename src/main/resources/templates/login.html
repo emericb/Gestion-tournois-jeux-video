@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <title>Authentification</title>
+</head>
+<body>
+
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
+
+<div class="container">
+    <h4 class="color-change">Veuillez vous connectez</h4>
+    <form th:action="@{/login}" method="post">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>
+                    <input type="text" name="email" placeholder="email">
+                </td>
+                <td>
+                    <input type="text" name="password" placeholder="password">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p><button type="submit">Se connecter</button></p>
+        <p><a class="btn btn-primary" th:href="@{/registration}">S'inscrire</a></p>
+        <p><a class="btn btn-primary" th:href="@{/password_Recovery}">Récupérer votre mot de passe</a></p>
+    </form>
+</div>
+
+<span th:replace="~{frag :: footer}"></span>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
+
+<div class="container">
+
+    <h4 class="color-change">Mon profil</h4>
+    <table class="table">
+        <tbody>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getPreference()}"></td>
+        <td th:text="${user.getRank()}"></td>
+        <td><img th:if="${user.getProfilPic()}" th:src="@{/images/{filename}(filename=${user.profilPic})}"
+                 alt="Image de l'user" style="width: 100px; height: auto;"></td>
+        </tbody>
+    </table>
+
+    <h4 class="color-change">Modifier le profil</h4>
+    <form th:action="@{/updateUser}" method="post" th:object="${user}">
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <p>Veuillez corriger les erreurs suivantes :</p>
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+        <input type="hidden" th:field="*{id}">
+
+        <div>
+            <input type="text" id="username" placeholder="Modifiez votre username" required>
+            <div th:if="${#fields.hasErrors('username')}" class="text-danger"
+                 th:each="err : ${#fields.errors('username')}" th:text="${err}"></div>
+        </div>
+
+
+        <div>
+            <input type="text" id="password" placeholder="Modifiez votre password"
+                   required>
+            <div th:if="${#fields.hasErrors('password')}" class="text-danger"
+                 th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+        </div>
+        <div>
+            <input type="text" id="preference"
+                   placeholder="Modifiez vos préférences">
+            <div th:if="${#fields.hasErrors('preference')}" class="text-danger"
+                 th:each="err : ${#fields.errors('preference')}" th:text="${err}"></div>
+        </div>
+        <br>
+        <div>
+            <select id="rank" th:field="*{rank}">
+                <option th:each="rank : ${T(org.project.gestiontournoisjeuxvideo.util.Rank).values()}"
+                        th:value="${rank}"
+                        th:text="${rank}"></option>
+            </select>
+        </div>
+        <br>
+        <p>
+            <button type="submit" class="btn btn-primary">Valider les modifications</button>
+        </p>
+
+    </form>
+
+    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+        <h5>Modifier mon image de profil</h5>
+        <input type="hidden" th:field="*{user.id}">
+        <input type="file" name="image">
+        <br>
+        <button type="submit">Valider</button>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>
