@@ -6,7 +6,7 @@
     justify-content: center;
     color: white;
     font-family: monospace;
-    background: #002244;
+    background: #000000;
 
 }
 
@@ -17,6 +17,7 @@ header{
 h1 {
     font-size: 100px;
     font-weight: 400;
+
 }
 
 h2 {

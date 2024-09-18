@@ -29,6 +29,7 @@ public class LoginController {
     public String login(Model model) {
         if (loginService.isLogged()) {
             model.addAttribute("user", userService.getByEmail((String) httpSession.getAttribute("email")));
+
             return "user";
         }
         return "login";
