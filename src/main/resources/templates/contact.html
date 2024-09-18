@@ -11,17 +11,11 @@
 <span th:replace="~{frag :: header}"></span>
 <span th:replace="~{frag :: navbar(${userlog})}"></span>
 
-    <div class="container">
-
-      <p>Pour toute question ou support, n'hésitez pas à nous contacter.</p>
-    </div>
-
-
-    <div class="container">
+     <div class="container">
       <h4>Formulaire de contact</h4>
       <form>
 
-        <textarea  id="fname" type="text" name="firstname" placeholder="Votre nom et prénom"></textarea>
+        <textarea  id="fname" type="text" name="firstname" placeholder="Votre nom"></textarea>
 
 
         <textarea  id="sujet" type="text" name="sujet" placeholder="L'objet de votre message"></textarea>
@@ -30,14 +24,12 @@
         <textarea id="emailAddress" type="email" name="email" placeholder="Votre email" ></textarea>
       </form>
 
-
+         <br>
       <form>
         <textarea id="subject" type="subject" name="subject" placeholder="Votre message" style="height:200px"></textarea>
       </form>
 <br>
-      <form>
-        <input type="submit" value="Envoyer">
-      </form>
+         <p><button type="submit">Envoyer</button></p>
     </div>
 
   </section>

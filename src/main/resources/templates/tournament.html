@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Liste des tournois</title>
-
 </head>
 <body>
 <span th:replace="~{frag :: header}"></span>
@@ -13,18 +12,18 @@
 <main>
 <div class="container">
 
-    <h4 class="color-change">Liste des tournois</h4>
+       <h4 class="color-change">Liste des tournois</h4>
     <table class="table" th:unless="${tournaments.isEmpty()}">
         <thead>
         <tr>
-            <th scope="col">Nom du tournois</th>
+            <th scope="col">Nom du tournoi</th>
             <th scope="col">Format</th>
-            <th scope="col">Regles</th>
+            <th scope="col">Règles</th>
             <th scope="col">Date du lancement</th>
             <th scope="col">Date de fin</th>
             <th scope="col">Nombre de participant/equipe</th>
-            <th scope="col">Critere de participation</th>
-            <th scope="col">Rank pour participer</th>
+            <th scope="col">Critères de participation</th>
+            <th scope="col">Rank</th>
             <th scope="col">Inscription</th>
         </tr>
         </thead>
@@ -43,8 +42,8 @@
         </tbody>
     </table>
 
-
     <div th:if="${isAdmin}">
+        <p></p>
         <h4 class="color-change">Enregistrer un nouveau tournoi</h4>
         <form th:action="@{/tournament-registration}" method="post" th:object="${tournament}">
             <table class="table">
@@ -111,6 +110,8 @@
             </table>
         </form>
     </div>
+    <p></p>
+    <p><a th:href="@{/match/{id_tournament}(id_tournament=${tournament.getId()})}" class="btn btn-primary">Matchs</a></p>
 
 </div>
 </main>

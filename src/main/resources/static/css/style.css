@@ -121,19 +121,22 @@ p{
     height: 50px;
 }
 
-.table{
-    display: flex;
-    gap: 15px;
-    text-align: center;
-    justify-content: center;
-    height: 200px;
-}
-
 input {
     display: flex;
-    width: 200px;
+    width: 300px;
     margin-left: auto;
     margin-right: auto;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+
+}
+
+td, th {
+    border: 1px solid #ffffff;
+    padding: 15px;
 }
 
 footer {

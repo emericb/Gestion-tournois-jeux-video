@@ -27,13 +27,13 @@
       <li>
         <a class="nav-link" th:href="@{/}">  Accueil  </a>
       </li>
-      <li >
+      <li th:if="${userlog!=null}">
         <a class="nav-link" th:href="@{/tournament}">  Tournois  </a>
       </li>
-      <li >
+      <li th:if="${userlog!=null}">
         <a class="nav-link" th:href="@{/user}">  Mon compte  </a>
       </li>
-      <li>
+      <li th:if="${userlog==null}">
         <a class="nav-link" th:href="@{/registration}">  Inscription  </a>
       </li>
       <li th:if="${userlog==null}">
@@ -51,6 +51,7 @@
 </th:block>
 
 <th:block th:fragment="footer">
+  <p></p>
   <footer>
     <p>2024 Gaming Tournaments. Tous droits réservés.</p>
   </footer>

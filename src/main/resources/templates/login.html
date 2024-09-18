@@ -12,7 +12,7 @@
 <span th:replace="~{frag :: navbar(${userlog})}"></span>
 
 <div class="container">
-    <h4 class="color-change">Veuillez vous connectez</h4>
+    <h4 class="color-change">Veuillez vous connecter</h4>
     <form th:action="@{/login}" method="post">
         <table class="table">
             <tbody>
@@ -26,6 +26,7 @@
             </tr>
             </tbody>
         </table>
+        <br>
         <p><button type="submit">Se connecter</button></p>
         <p><a class="btn btn-primary" th:href="@{/registration}">S'inscrire</a></p>
         <p><a class="btn btn-primary" th:href="@{/password_Recovery}">Récupérer votre mot de passe</a></p>

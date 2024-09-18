@@ -47,6 +47,7 @@ public class MatchController {
         model.addAttribute("isAdmin", user.getRole() == Role.ADMIN);
         model.addAttribute("match", new Match());
         model.addAttribute("users", userService.getAll());
+        model.addAttribute("userlog", httpSession.getAttribute("user"));
         return "match";
     }
 

@@ -9,7 +9,7 @@
 <body>
 
 <span th:replace="~{frag :: header}"></span>
-<span th:replace="~{frag :: navbar}"></span>
+<span th:replace="~{frag :: navbar(${userlog})}"></span>
 <main>
     <div class="container">
 

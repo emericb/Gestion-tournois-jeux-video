@@ -1,9 +1,10 @@
 package org.project.gestiontournoisjeuxvideo.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.project.gestiontournoisjeuxvideo.util.Rank;
 import org.project.gestiontournoisjeuxvideo.util.Role;
@@ -25,17 +26,19 @@ public class User {
     private int id;
 
     @Column(unique = true)
+    @NotNull(message = "Ce champ doit être rempli !")
     private String username;
 
     @Column(unique = true)
-    @NotBlank(message = "La valeur ne doit pas être vide !")
     @NotNull(message = "Ce champ doit être rempli !")
-    @MyValid(minLength = 3)
     private String email;
-    @NotBlank(message = "La valeur ne doit pas être vide !")
+
+    //@NotBlank(message = "La valeur ne doit pas être vide !")
     @NotNull(message = "Ce champ doit être rempli !")
-    @MyValid(minLength = 3)
+    @MyValid(minLength = 8)
+    @Size(max = 25, message = "Maximum 25 caractères svp !")
     private String password;
+
     private String profilPic;
     private String preference;
     private Role role;
@@ -43,5 +46,6 @@ public class User {
 
 
     @OneToMany(mappedBy = "user")
-    private List<Participation> participationsRecord;
+    private List<Participation> participationRecord;
 }
+

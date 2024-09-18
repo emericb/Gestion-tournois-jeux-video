@@ -20,11 +20,11 @@
             <tr>
                 <th scope="col">Nom du tournois</th>
                 <th scope="col">Format</th>
-                <th scope="col">Regles</th>
+                <th scope="col">Règles</th>
                 <th scope="col">Date du lancement</th>
                 <th scope="col">Date de fin</th>
                 <th scope="col">Nombre de participant/equipe</th>
-                <th scope="col">Critere de participation</th>
+                <th scope="col">Critères de participation</th>
                 <th scope="col">Rank pour participer</th>
             </tr>
             </thead>
@@ -41,7 +41,7 @@
             </tr>
             </tbody>
         </table>
-
+        <p></p>
         <h4 class="color-change">Liste des Participants</h4>
         <table class="table">
             <thead>
@@ -57,7 +57,7 @@
             </tr>
             </tbody>
         </table>
-
+        <p></p>
         <h4 class="color-change">Inscription au Tournoi</h4>
         <div>
             <form th:action="@{/participation/{id_tournament}(id_tournament=${tournament.id})}" method="post"

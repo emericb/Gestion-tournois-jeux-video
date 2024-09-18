@@ -26,7 +26,10 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
+    @Autowired
     private final UserService userService;
+
     private final ParticipationService participationService;
     private final TournamentService tournamentService;
     private final MatchService matchService;
@@ -51,7 +54,6 @@ public class UserController {
         model.addAttribute("userlog", httpSession.getAttribute("user"));
         return "home";
     }
-
 
     @RequestMapping("/user")
     public String user(Model model) {
