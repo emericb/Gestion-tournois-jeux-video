@@ -1,88 +1,96 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Participation au Tournoi</title>
-    <span th:replace="~{frag :: bootstrapImport}"></span>
+
 </head>
 <body>
 
+<span th:replace="~{frag :: header}"></span>
 <span th:replace="~{frag :: navbar}"></span>
-<span th:replace="~{frag :: footer}"></span>
+<main>
+    <div class="container">
 
-<div class="container">
+        <h3 class="color-change">Détails du Tournoi</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nom du tournois</th>
+                <th scope="col">Format</th>
+                <th scope="col">Regles</th>
+                <th scope="col">Date du lancement</th>
+                <th scope="col">Date de fin</th>
+                <th scope="col">Nombre de participant/equipe</th>
+                <th scope="col">Critere de participation</th>
+                <th scope="col">Rank pour participer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${tournament.getName()}"></td>
+                <td th:text="${tournament.getFormat()}"></td>
+                <td th:text="${tournament.getRules()}"></td>
+                <td th:text="${tournament.getDateStart()}"></td>
+                <td th:text="${tournament.getDateEnd()}"></td>
+                <td th:text="${tournament.getPlayerLimit()}"></td>
+                <td th:text="${tournament.getEligibilityCriteria()}"></td>
+                <td th:text="${tournament.getRank()}"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    <h1 class="color-change">Détails du Tournoi</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nom du tournois</th>
-            <th scope="col">Format</th>
-            <th scope="col">Regles</th>
-            <th scope="col">Date du lancement</th>
-            <th scope="col">Date de fin</th>
-            <th scope="col">Nombre de participant/equipe</th>
-            <th scope="col">Critere de participation</th>
-            <th scope="col">Rank pour participer</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${tournament.getName()}"></td>
-            <td th:text="${tournament.getFormat()}"></td>
-            <td th:text="${tournament.getRules()}"></td>
-            <td th:text="${tournament.getDateStart()}"></td>
-            <td th:text="${tournament.getDateEnd()}"></td>
-            <td th:text="${tournament.getPlayerLimit()}"></td>
-            <td th:text="${tournament.getEligibilityCriteria()}"></td>
-            <td th:text="${tournament.getRank()}"></td>
-        </tr>
-        </tbody>
-    </table>
+        <h1 class="color-change">Liste des Participants</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="participation : ${participants}">
+                <td th:text="${participation.user.username}"></td>
+                <td th:text="${participation.user.email}"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    <h1 class="color-change">Liste des Participants</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="participation : ${participants}">
-            <td th:text="${participation.user.username}"></td>
-            <td th:text="${participation.user.email}"></td>
-        </tr>
-        </tbody>
-    </table>
+        <h1 class="color-change">Inscription au Tournoi</h1>
+        <div>
+            <form th:action="@{/participation/{id_tournament}(id_tournament=${tournament.id})}" method="post"
+                  th:object="${participation}">
 
-    <h1 class="color-change">Inscription au Tournoi</h1>
-    <div>
-        <form th:action="@{/participation/{id_tournament}(id_tournament=${tournament.id})}" method="post" th:object="${participation}">
+                <input type="hidden" th:field="*{tournament.id}" th:value="${tournament.id}">
+                <input type="hidden" th:field="*{user.id}" th:value="${user.id}">
 
-        <input type="hidden" th:field="*{tournament.id}" th:value="${tournament.id}">
-            <input type="hidden" th:field="*{user.id}" th:value="${user.id}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Inscription</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <button th:if="${isRank}" type="submit" class="btn btn-primary">S'inscrire</button>
+                            <p th:unless="${isRank}">Vous n'avez pas le rang nécessaire pour vous inscrire à ce
+                                tournoi.</p>
+                            <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Inscription</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <button th:if="${isRank}" type="submit" class="btn btn-primary">S'inscrire</button>
-                        <p th:unless="${isRank}">Vous n'avez pas le rang nécessaire pour vous inscrire à ce tournoi.</p>
-                        <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
     </div>
 
-</div>
+</main>
+<span th:replace="~{frag :: footer}"></span>
+
 
 </body>
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+  <title>home</title>
+</head>
+<body>
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
+
+
+<main>
+
+    <h3>W E L C O M E</h3>
+    <p>Organisez et participez à des tournois de jeux vidéo en toute simplicité.</p>
+
+  <div class="cadre">
+    <div class="gauche">  tournois en vedette</div>
+    <div class="milieu"> prochains événements</div>
+    <div class="droite"> actualités</div>
+  </div>
+</main>
+
+<span th:replace="~{frag :: footer}"></span>
+
+</body>
+</html>

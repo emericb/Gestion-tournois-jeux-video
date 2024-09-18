@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Liste des tournois</title>
-    <span th:replace="~{frag :: bootstrapImport}"></span>
+
 </head>
 <body>
-
+<span th:replace="~{frag :: header}"></span>
 <span th:replace="~{frag :: navbar}"></span>
-<span th:replace="~{frag :: footer}"></span>
-
+<main>
 <div class="container">
 
-    <h1 class="color-change">Liste de tournois</h1>
+    <h3 class="color-change">Liste des tournois</h3>
     <table class="table" th:unless="${tournaments.isEmpty()}">
         <thead>
         <tr>
@@ -106,6 +107,9 @@
     </div>
 
 </div>
+</main>
+<span th:replace="~{frag :: footer}"></span>
+
 
 </body>
 </html>

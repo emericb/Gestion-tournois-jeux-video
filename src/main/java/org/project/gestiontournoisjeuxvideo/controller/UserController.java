@@ -46,7 +46,13 @@ public class UserController {
         this.httpSession = httpSession;
     }
 
-    @RequestMapping(value = {"/user", "/"})
+    @RequestMapping("/")
+    public String home() {
+                   return "home";
+        }
+
+
+    @RequestMapping("/user")
     public String user(Model model) {
         if (loginService.isLogged()) {
             String email = (String) httpSession.getAttribute("email");

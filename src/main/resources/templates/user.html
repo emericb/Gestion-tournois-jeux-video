@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>User Profile</title>
-    <span th:replace="~{frag :: bootstrapImport}"></span>
+
 </head>
 <body>
 
+<span th:replace="~{frag :: header}"></span>
 <span th:replace="~{frag :: navbar}"></span>
-<span th:replace="~{frag :: footer}"></span>
-
+<main>
 <div class="container">
 
-    <h1 class="color-change">Votre profil</h1>
+    <h3 class="color-change">Votre profil</h3>
     <table class="table">
         <thead>
         <tr>
@@ -33,7 +35,6 @@
         </tbody>
 
     </table>
-
 
     <h1 class="color-change">Modifier le profil</h1>
     <form th:action="@{/updateUser}" method="post" th:object="${user}">
@@ -102,7 +103,8 @@
         </form>
     </table>
 </div>
-
+    </main>
+<span th:replace="~{frag :: footer}"></span>
 
 </body>
 </html>
