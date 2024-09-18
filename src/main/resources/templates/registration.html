@@ -18,14 +18,18 @@
         <table class="table">
             <tbody>
             <tr>
+
                 <td>
-                    <input type="text" id="email" th:field="*{email}" placeholder="Entrez l email">
+                    <input type="text" id="email" th:field="*{email}" placeholder="Entrez l email" required>
+                    <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
                 </td>
                 <td>
-                    <input type="text" id="username" th:field="*{username}" placeholder="Entrez votre username">
+                    <input type="text" id="username" th:field="*{username}" placeholder="Entrez votre username" required>
+                    <div th:if="${#fields.hasErrors('username')}" class="text-danger" th:each="err : ${#fields.errors('username')}" th:text="${err}"></div>
                 </td>
                 <td>
-                    <input type="text" id="password" th:field="*{password}" placeholder="Entrez votre password">
+                    <input type="text" id="password" th:field="*{password}" placeholder="Entrez votre password" required>
+                    <div th:if="${#fields.hasErrors('password')}" class="text-danger" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
                 </td>
             </tr>
             </tbody>

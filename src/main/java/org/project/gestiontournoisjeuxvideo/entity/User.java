@@ -3,9 +3,11 @@ package org.project.gestiontournoisjeuxvideo.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.project.gestiontournoisjeuxvideo.util.Rank;
 import org.project.gestiontournoisjeuxvideo.util.Role;
+import org.project.gestiontournoisjeuxvideo.validation.MyValid;
 
 import java.util.List;
 
@@ -25,9 +27,13 @@ public class User {
     private String username;
 
     @Column(unique = true)
-    @NotBlank(message = "email est a remplir")
+    @NotBlank(message = "La valeur ne doit pas être vide !")
+    @NotNull(message = "Ce champ doit être rempli !")
+    @MyValid(minLength = 3)
     private String email;
-    @NotBlank(message = "password est a remplir")
+    @NotBlank(message = "La valeur ne doit pas être vide !")
+    @NotNull(message = "Ce champ doit être rempli !")
+    @MyValid(minLength = 3)
     private String password;
     private String profilPic;
     private String preference;
