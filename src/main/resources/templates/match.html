@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <title>Match du tournoi</title>
+</head>
+<body>
+
+<span th:replace="~{frag :: header}"></span>
+<span th:replace="~{frag :: navbar}"></span>
+<main>
+    <div class="container">
+
+        <h4 class="color-change">Détails des matchs</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nom du tournoi</th>
+                <th scope="col">Date du lancement</th>
+                <th scope="col">Date de fin</th>
+                <th scope="col">Username Joueur 1</th>
+                <th scope="col">Score Joueur 1</th>
+                <th scope="col">Username Joueur 2</th>
+                <th scope="col">Score Joueur 2</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match : ${matchs}">
+                <td th:text="${match.tournament.name}"></td>
+                <td th:text="${match.dateStart}"></td>
+                <td th:text="${match.dateEnd}"></td>
+                <td>
+                    <span th:if="${match.player1 != null}" th:text="${match.player1.username}"></span>
+                    <span th:if="${match.player1 == null}" th:text="'N/A'"></span>
+                </td>
+                <td th:text="${match.scorePlayer1}"></td>
+                <td>
+                    <span th:if="${match.player2 != null}" th:text="${match.player2.username}"></span>
+                    <span th:if="${match.player2 == null}" th:text="'N/A'"></span>
+                </td>
+                <td th:text="${match.scorePlayer2}"></td>
+                <td th:text="${match.status}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4 class="color-change">Créer un match</h4>
+        <form th:action="@{/match/{id_tournament}(id_tournament=${tournament.id})}" method="post" th:object="${match}">
+
+            <input type="hidden" th:field="*{tournament.id}" th:value="${tournament.id}">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Joueur 1</th>
+                    <th scope="col">Score Joueur 1</th>
+                    <th scope="col">Joueur 2</th>
+                    <th scope="col">Score Joueur 2</th>
+                    <th scope="col">Date de début</th>
+                    <th scope="col">Date de fin</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <select th:field="*{player1}" required>
+                            <option value="" disabled selected>Choisissez un joueur</option>
+                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{scorePlayer1}" placeholder="Score" required>
+                    </td>
+                    <td>
+                        <select th:field="*{player2}" required>
+                            <option value="" disabled selected>Choisissez un joueur</option>
+                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{scorePlayer2}" placeholder="Score" required>
+                    </td>
+                    <td>
+                        <input type="datetime-local" th:field="*{dateStart}" required>
+                    </td>
+                    <td>
+                        <input type="datetime-local" th:field="*{dateEnd}" required>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary">Créer le match</button>
+        </form>
+
+    </div>
+</main>
+<span th:replace="~{frag :: footer}"></span>
+
+</body>
+</html>
