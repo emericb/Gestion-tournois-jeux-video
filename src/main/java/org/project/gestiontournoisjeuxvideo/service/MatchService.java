@@ -1,6 +1,7 @@
 package org.project.gestiontournoisjeuxvideo.service;
 
 import org.project.gestiontournoisjeuxvideo.entity.Match;
+import org.project.gestiontournoisjeuxvideo.entity.Tournament;
 import org.project.gestiontournoisjeuxvideo.repository.MatchRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,9 @@ public class MatchService {
 
     public void delete(Match match){
         matchRepository.delete(match);
+    }
+
+    public List<Match> getMatchesByTournois(Tournament tournois){
+        return matchRepository.findByTournament(tournois);
     }
 }

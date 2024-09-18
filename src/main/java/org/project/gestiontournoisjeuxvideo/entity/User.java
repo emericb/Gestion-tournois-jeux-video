@@ -24,6 +24,7 @@ public class User {
     @Column(name ="id_member")
     private int id;
 
+    @Column(unique = true)
     private String username;
 
     @Column(unique = true)
