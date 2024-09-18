@@ -14,7 +14,7 @@
 <main>
     <div class="container">
 
-        <h3 class="color-change">Détails du Tournoi</h3>
+        <h4 class="color-change">Détails du Tournoi</h4>
         <table class="table">
             <thead>
             <tr>
@@ -42,7 +42,7 @@
             </tbody>
         </table>
 
-        <h3 class="color-change">Liste des Participants</h3>
+        <h4 class="color-change">Liste des Participants</h4>
         <table class="table">
             <thead>
             <tr>
@@ -58,7 +58,7 @@
             </tbody>
         </table>
 
-        <h3 class="color-change">Inscription au Tournoi</h3>
+        <h4 class="color-change">Inscription au Tournoi</h4>
         <div>
             <form th:action="@{/participation/{id_tournament}(id_tournament=${tournament.id})}" method="post"
                   th:object="${participation}">

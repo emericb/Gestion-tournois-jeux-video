@@ -29,6 +29,19 @@ h3 {
     font-size: 50px;
 }
 
+h4 {
+    height: 50px;
+    font-size: 30px;
+    font-weight: normal;
+    gap: 15px;
+}
+h5 {
+    height: 30px;
+    font-size: 15px;
+    gap: 15px;
+    font-weight: normal;
+}
+
 .pink {
     color: azure;
     --color1: #ffc9f3;
@@ -113,6 +126,13 @@ p{
     text-align: center;
     justify-content: center;
     height: 200px;
+}
+
+input {
+    display: flex;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 footer {
